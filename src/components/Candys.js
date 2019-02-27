@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter, NavLink, Route, Redirect, Switch } from 'react-router-dom';
-
+import { Route } from 'react-router-dom';
+import { CandyProducts } from './CandyProducts';
 
 export class Candys extends React.Component {
   render() {
@@ -8,9 +8,7 @@ export class Candys extends React.Component {
     return(
       <>
       <div className="container">
-        <Route  path="/candys" render={()=> <p>select bonbons here</p>}/>
-        <Route path="/candys" render={()=> <p>select liquores here</p>}/>
-        <Route path="/candys" render={()=> <p>select pralines here</p>}/>
+        <Route  path="/candys" render={()=> <CandyProducts />}/>
       </div>
       </>
     )

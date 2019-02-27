@@ -5,14 +5,14 @@ import { Candys } from './Candys.js';
 import { Chocolades } from './Chocolades.js';
 import { Pastrys } from './Pastrys.js';
 import { Home } from './Home.js';
-
+import { NavBasket } from './NavBasket.js'
 
 export class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
         <>
-        <Route path='/' render={()=><h3 className="title bg-success text-light mx-2 p-2">welcome to the candyshop</h3>}/>
+        <Route path='/' render={()=> <NavBasket />}/>
         <Route exact path='/' render={()=> <Home />}/>
         <Switch>
           <Route path='/candys' render={()=> <Candys />}/>
