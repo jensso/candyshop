@@ -17,7 +17,6 @@ export class Home extends React.Component {
               find chocolates from different countrys<img src={choco} width="100%" alt="X"/></NavLink>
         </div>
         </>
-
     )
   }
 }

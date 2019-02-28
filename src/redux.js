@@ -1,33 +1,35 @@
 import {createStore} from 'redux';
 
-const initialState = {amount: 0,
-                      price: 0,
+const initialState = {amount: 1,
+                      price: 12,
                       sum: 0,
+                      netto: 0,
+                      product: {},
                       basket: []};
 const reducer = (state=initialState, action)=> {
   const copyOfState = {...state};
+console.log(copyOfState);
 
   switch(action.type) {
     case '+':
-    copyOfState.amount = copyOfState.amount +1;
+    copyOfState.amount = state.amount +1;
     return copyOfState;
 
     case '-':
-    copyOfState.amount = copyOfState.amount -1;
+    copyOfState.amount = state.amount -1;
     return copyOfState;
 
-    case 'chocWorld':
-    copyOfState.sum = copyOfState.sum+8;
-    return copyOfState;
-
-    case 'PASTRY':
-    copyOfState.sum = copyOfState.sum+12;
+    case 'BUY':
+    copyOfState.sum = (state.amount*state.price);
+    copyOfState.netto = Math.round(state.sum/1.19);
+    copyOfState.basket= [...copyOfState.basket, copyOfState.product];
     return copyOfState;
 
     default:
     return state;
   }
 }
+
 export var addItem = (ev)=> {
   return {
     type: '+',
@@ -40,9 +42,10 @@ export var lessItem = (ev)=> {
     event: ev
   }
 }
-export var buyPastry =()=> {
+export var buyIt =()=> {
   return {
-    type: 'PASTRY'
+    type: 'BUY'
   }
 }
+
 export const store = createStore(reducer);

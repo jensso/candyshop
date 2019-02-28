@@ -5,7 +5,8 @@ import { Candys } from './Candys.js';
 import { Chocolades } from './Chocolades.js';
 import { Pastrys } from './Pastrys.js';
 import { Home } from './Home.js';
-import { NavBasket } from './NavBasket.js'
+import { NavBasket } from './NavBasket.js';
+import { MoreInfo } from './MoreInfo.js';
 
 export class App extends React.Component {
   render() {
@@ -15,6 +16,7 @@ export class App extends React.Component {
         <Route path='/' render={()=> <NavBasket />}/>
         <Route exact path='/' render={()=> <Home />}/>
         <Switch>
+          <Route path='/more' render={()=> <MoreInfo />}/>
           <Route path='/candys' render={()=> <Candys />}/>
           <Route path='/chocolades' render={()=> <Chocolades />}/>
           <Route path='/pastrys' render={()=> <Pastrys />}/>
