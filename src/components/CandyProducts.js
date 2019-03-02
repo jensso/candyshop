@@ -10,17 +10,17 @@ export class CandyProducts extends React.Component {
     <div className="container d-flex justify-content-around">
       <div className="card m-1 p-1">
         <img className="card-img-top" src={candy_1} alt="X"/>
-        <div className="bg-warning card-body">Fruity sweets & fruity Lollipops<br/><span>$8 /kg</span></div>
+        <div cat="candy" className="bg-warning card-body">Fruity sweets & fruity Lollipops<br/><span>$8 /kg</span></div>
         <ProductFooterRX />
     </div>
     <div className="card m-1 p-1">
       <img className="card-img-top" src={candy_2} alt="X"/>
-        <div className="bg-warning card-body">Juicy sweets & juicy Lollipops<br/><span>$7 /kg</span></div>
+        <div cat="candy" className="bg-warning card-body">Juicy sweets & juicy Lollipops<br/><span>$8 /kg</span></div>
         <ProductFooterRX />
     </div>
     <div className="card m-1 p-1">
       <img className="card-img-top" src={candy_3} alt="X"/>
-      <div className="bg-warning card-body">Funny sweets with lovely Messages<br/><span>$7 /kg</span></div>
+      <div cat="candy" className="bg-warning card-body">Funny sweets with lovely Messages<br/><span>$8 /kg</span></div>
       <ProductFooterRX />
     </div>
 </div>

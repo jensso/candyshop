@@ -9,6 +9,7 @@ import { NavBasketRX } from './NavBasket.js';
 import { MoreInfo } from './MoreInfo.js';
 
 export class App extends React.Component {
+
   render() {
     return (
       <BrowserRouter>

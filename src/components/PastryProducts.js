@@ -10,17 +10,17 @@ export class PastryProducts extends React.Component {
     <div className="container d-flex justify-content-around">
       <div className="card m-1 p-1">
         <img className="card-img-top" src={pastry_1} alt="X"/>
-        <div className="bg-warning card-body">pastry like your GrandMa did<br/><span>$12 /kg</span></div>
+        <div cat="pastry" className="bg-warning card-body">pastry like your GrandMa did<br/><span>$12 /kg</span></div>
         <ProductFooterRX />
       </div>
       <div className="card m-1 p-1">
         <img className="card-img-top" src={pastry_2} alt="X"/>
-        <div className="bg-warning card-body">pastry like you did it<br/><span>$12 /kg</span></div>
+        <div cat="pastry" className="bg-warning card-body">pastry like you did it<br/><span>$12 /kg</span></div>
         <ProductFooterRX />
       </div>
       <div className="card m-1 p-1">
         <img className="card-img-top" src={pastry_3} alt="X"/>
-        <div className="bg-warning card-body">pastry like your GrandMa did<br/><span>$12 /kg</span></div>
+        <div cat="pastry" className="bg-warning card-body">pastry for your party<br/><span>$12 /kg</span></div>
         <ProductFooterRX />
       </div>
     </div>

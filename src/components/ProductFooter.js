@@ -21,16 +21,17 @@ class ProductFooter extends React.Component {
 }
 
 export const mapStateToProps = (state)=> {
-  console.log(state);
   return {
     basket: state.basket,
     newOrder: {...state.newOrder},
     amount: state.amount,
     counter: state.counter,
+    choco: state.choco,
+    pastry: state.pastry,
+    candy: state.candy
   }
 }
 export const mapDispatchToProps = (dispatch)=> {
-  console.log(dispatch);
   return {
         transmit: (ev)=> dispatch(transmit(ev)),
         addItem: (ev)=> dispatch(plus(ev)),

@@ -5,14 +5,12 @@ import {mapStateToProps, mapDispatchToProps} from './ProductFooter.js';
 export class ShoppingCart extends React.Component {
   render() {
     return(
-      <div className="bg-info p-2">
-        your shopping-cart:<br/>
-        {this.props.amount}x Sweets<br/>
+      <div className="bg-info my-1 p-2">
+        <i>your shopping-cart:</i><br/>
         netto {this.props.newOrder.netto}<br/>
         + tax {this.props.newOrder.tax}<br/>
         <b>total: {this.props.newOrder.sum}</b>
       </div>
-
     )
   }
 }
