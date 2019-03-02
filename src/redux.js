@@ -1,28 +1,39 @@
 import {createStore} from 'redux';
 
-const initialState = {amount: 1,
+const initialState = {amount: 0,
+                      counter: 0,
                       price: 12,
-                      sum: 0,
-                      netto: 0,
-                      product: {},
-                      basket: []};
+                      basket: [],
+                      newOrder: {sum:0,tax:0,netto:0}
+                      };
 const reducer = (state=initialState, action)=> {
   const copyOfState = {...state};
-console.log(copyOfState);
 
   switch(action.type) {
-    case '+':
-    copyOfState.amount = state.amount +1;
+
+    case 'ADD':
+    copyOfState.counter = copyOfState.counter+1;
+    copyOfState.amount = copyOfState.amount+1;
     return copyOfState;
 
-    case '-':
-    copyOfState.amount = state.amount -1;
+    case 'DEC':
+    if (copyOfState.counter > 0) {
+    copyOfState.counter = copyOfState.counter-1;
+    copyOfState.amount = copyOfState.amount-1;
     return copyOfState;
+  }
+    else {
+      return copyOfState;
+    }
 
     case 'BUY':
-    copyOfState.sum = (state.amount*state.price);
-    copyOfState.netto = Math.round(state.sum/1.19);
-    copyOfState.basket= [...copyOfState.basket, copyOfState.product];
+    copyOfState.counter = 0;
+    copyOfState.newOrder.sum = (copyOfState.amount*copyOfState.price).toFixed(2);
+    copyOfState.newOrder.netto = (copyOfState.newOrder.sum / 1.19).toFixed(2);
+    copyOfState.newOrder.tax = (copyOfState.newOrder.sum-copyOfState.newOrder.netto).toFixed(2);
+    copyOfState.basket = [...state.basket, {...state.newOrder}];
+    console.log(copyOfState);
+
     return copyOfState;
 
     default:
@@ -30,21 +41,22 @@ console.log(copyOfState);
   }
 }
 
-export var addItem = (ev)=> {
+export var transmit =(ev)=> {
   return {
-    type: '+',
+    type: 'BUY',
     event: ev
   }
 }
-export var lessItem = (ev)=> {
+export var plus = (ev)=> {
   return {
-    type: '-',
+    type: 'ADD',
     event: ev
   }
 }
-export var buyIt =()=> {
+export var minus = (ev)=> {
   return {
-    type: 'BUY'
+    type: 'DEC',
+    event: ev
   }
 }
 

@@ -5,7 +5,7 @@ import { Candys } from './Candys.js';
 import { Chocolades } from './Chocolades.js';
 import { Pastrys } from './Pastrys.js';
 import { Home } from './Home.js';
-import { NavBasket } from './NavBasket.js';
+import { NavBasketRX } from './NavBasket.js';
 import { MoreInfo } from './MoreInfo.js';
 
 export class App extends React.Component {
@@ -13,7 +13,7 @@ export class App extends React.Component {
     return (
       <BrowserRouter>
         <>
-        <Route path='/' render={()=> <NavBasket />}/>
+        <Route path='/' render={()=> <NavBasketRX />}/>
         <Route exact path='/' render={()=> <Home />}/>
         <Switch>
           <Route path='/more' render={()=> <MoreInfo />}/>

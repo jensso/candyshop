@@ -2,7 +2,7 @@ import React from 'react';
 import pastry_1 from '../content/pastry_1.jpg';
 import pastry_2 from '../content/pastry_2.jpg';
 import pastry_3 from '../content/pastry_3.jpg';
-import { ProductFooterRX } from './ProductFooter';
+import { ProductFooterRX } from './ProductFooter.js';
 
 export class PastryProducts extends React.Component {
   render() {

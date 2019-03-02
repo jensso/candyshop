@@ -1,16 +1,17 @@
 import React from 'react';
 import {  NavLink } from 'react-router-dom';
 import {connect} from 'react-redux';
-import {buyIt, lessItem, addItem} from '.././redux.js';
+import {transmit, plus ,minus} from '.././redux.js';
 
 class ProductFooter extends React.Component {
+
   render() {
     return(
       <div className="card-footer bg-warning">
-        <span onClick={this.props.minus} className="badge bg-light">-</span>
-        <p className="badge lead bg-dark text-light">1</p>
-        <span onClick={this.props.plus}className="badge bg-light">+</span><br/>
-        <button type="submit" onClick={this.props.buy} className="m-1 btn btn-success btn-sm">add to cart</button>
+        <button onClick={this.props.decItem} className="btn badge bg-light">-</button>
+        <p className="badge lead bg-dark text-light">{this.props.counter}</p>
+        <button onClick={this.props.addItem} className="btn badge bg-light">+</button><br/>
+        <button onClick={this.props.transmit} className="m-1 btn btn-success btn-sm">add to cart</button>
         <NavLink to='/more'className="text-light">
         <button className="m-1 btn btn-info btn-sm">learn more</button>
         </NavLink>
@@ -18,19 +19,22 @@ class ProductFooter extends React.Component {
     )
   }
 }
-const mapStateToProps = (state)=> {
+
+export const mapStateToProps = (state)=> {
+  console.log(state);
   return {
     basket: state.basket,
-    amount: state.amount
-
+    newOrder: {...state.newOrder},
+    amount: state.amount,
+    counter: state.counter,
   }
 }
-const mapDispatchToProps = (dispatch)=> {
+export const mapDispatchToProps = (dispatch)=> {
+  console.log(dispatch);
   return {
-    buy: ()=> dispatch(buyIt()),
-    minus: ()=> dispatch(lessItem()),
-    plus: ()=> dispatch(addItem()),
+        transmit: (ev)=> dispatch(transmit(ev)),
+        addItem: (ev)=> dispatch(plus(ev)),
+        decItem: (ev)=> dispatch(minus(ev))
   }
 }
-
-export const ProductFooterRX = connect(0, mapDispatchToProps)(ProductFooter);
+export const ProductFooterRX = connect(mapStateToProps, mapDispatchToProps)(ProductFooter);
