@@ -9,7 +9,7 @@ class ProductFooter extends React.Component {
     return(
       <div className="card-footer bg-warning">
         <button onClick={this.props.decItem} className="btn badge bg-light">-</button>
-        <p className="badge lead bg-dark text-light">{this.props.counter}</p>
+        <p id="123" className="badge lead bg-dark text-light" value={this.props.counter}>{this.props.counter}</p>
         <button onClick={this.props.addItem} className="btn badge bg-light">+</button><br/>
         <button onClick={this.props.transmit} className="m-1 btn btn-success btn-sm">add to cart</button>
         <NavLink to='/more'className="text-light">
@@ -22,10 +22,11 @@ class ProductFooter extends React.Component {
 
 export const mapStateToProps = (state)=> {
   return {
-    basket: state.basket,
-    newOrder: {...state.newOrder},
-    amount: state.amount,
     counter: state.counter,
+    basket: state.basket,
+    cart: state.cart,
+    orders: state.orders,
+    newOrder: state.newOrder,
     choco: state.choco,
     pastry: state.pastry,
     candy: state.candy
