@@ -7,8 +7,8 @@ export class Candys extends React.Component {
 
     return(
       <>
-      <div className="container">
-        <Route  path="/candys" render={()=> <CandyProducts />}/>
+      <div className="container-fluid d-flex">
+        <Route  path="/candys/products" render={()=> <CandyProducts />}/>
       </div>
       </>
     )

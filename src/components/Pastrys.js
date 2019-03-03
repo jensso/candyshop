@@ -7,7 +7,7 @@ export class Pastrys extends React.Component {
     return(
       <>
       <div className="container">
-        <Route path="/pastrys" render={()=> <PastryProducts />}/>
+        <Route path="/pastrys/products" render={()=> <PastryProducts />}/>
       </div>
       </>
     )
