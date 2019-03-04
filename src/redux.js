@@ -3,7 +3,7 @@ import {createStore} from 'redux';
 const initialState = {counter: 0,
                       basket: [],
                       cart: [],
-                      orders: {sum:0,tax:0,netto:0,amount:0},
+                      orders: {sum:0,netto:0,tax:0},
                       choco: {type: 'choco', amount:0, price: 9.50, sum:0},
                       pastry: {type: 'pastry', amount:0, price:12, sum:0},
                       candy: {type: 'candy', amount: 0, price: 8,sum:0},
@@ -18,7 +18,6 @@ const reducer = (state=initialState, action)=> {
 
     case 'ADD':
     copyOfState.counter = copyOfState.counter+1;
-    copyOfState.orders.amount = copyOfState.counter;
 
     return copyOfState;
 
@@ -33,11 +32,17 @@ const reducer = (state=initialState, action)=> {
 
     case 'BUY':
       if (action.target === 'choco') {
-        copyOfState.choco.amount = copyOfState.choco.amount + action.value;
-        copyOfState.choco.sum = (copyOfState.choco.amount * copyOfState.choco.price).toFixed(2);
 
         if (copyOfState.counter > 0) {
-          copyOfState.orders = [...state.cart, copyOfState.orders];
+          copyOfState.choco.amount = copyOfState.choco.amount + action.value;
+
+        copyOfState.orders.sum =  (copyOfState.choco.amount*copyOfState.choco.price)+
+                                  (copyOfState.candy.amount*copyOfState.candy.price)+
+                                  (copyOfState.pastry.amount*copyOfState.pastry.price);
+                                  copyOfState.orders.netto = (copyOfState.orders.sum / 1.19).toFixed(2);
+                                  copyOfState.orders.tax = (copyOfState.orders.sum - copyOfState.orders.netto).toFixed(2);
+
+          copyOfState.cart = [...state.cart, copyOfState.orders];
 
         copyOfState.basket = [...state.basket, copyOfState.choco];
         copyOfState.counter = 0;
@@ -45,31 +50,39 @@ const reducer = (state=initialState, action)=> {
       return copyOfState;
       }
       if (action.target === 'pastry') {
-      copyOfState.pastry.amount = copyOfState.pastry.amount + action.value;
-      copyOfState.pastry.sum = (copyOfState.pastry.amount * copyOfState.pastry.price).toFixed(2);
 
         if (copyOfState.counter > 0) {
-        copyOfState.orders = [...state.cart, copyOfState.orders];
+          copyOfState.pastry.amount = copyOfState.pastry.amount + action.value;
+          copyOfState.orders.sum =  (copyOfState.choco.amount*copyOfState.choco.price)+
+                                    (copyOfState.candy.amount*copyOfState.candy.price)+
+                                    (copyOfState.pastry.amount*copyOfState.pastry.price);
+                                    copyOfState.orders.netto = (copyOfState.orders.sum / 1.19).toFixed(2);
+                                    copyOfState.orders.tax = (copyOfState.orders.sum - copyOfState.orders.netto).toFixed(2);
 
+        copyOfState.cart = [...state.cart, copyOfState.orders];
         copyOfState.basket = [...state.basket, copyOfState.pastry];
         copyOfState.counter = 0;
         }
-
       return copyOfState;
       }
       if (action.target === 'candy') {
-      copyOfState.candy.amount = copyOfState.candy.amount + action.value;
-      copyOfState.candy.sum = (copyOfState.candy.amount * copyOfState.candy.price).toFixed(2);
 
         if (copyOfState.counter > 0) {
-        copyOfState.orders = [...state.cart, copyOfState.orders];
+          copyOfState.candy.amount = copyOfState.candy.amount + action.value;
 
+          copyOfState.orders.sum =  (copyOfState.choco.amount*copyOfState.choco.price)+
+                                    (copyOfState.candy.amount*copyOfState.candy.price)+
+                                    (copyOfState.pastry.amount*copyOfState.pastry.price);
+                                    copyOfState.orders.netto = (copyOfState.orders.sum / 1.19).toFixed(2);
+                                    copyOfState.orders.tax = (copyOfState.orders.sum - copyOfState.orders.netto).toFixed(2);
+
+        copyOfState.cart = [...state.cart, copyOfState.orders];
         copyOfState.basket = [...state.basket, copyOfState.candy];
         copyOfState.counter = 0;
         }
       return copyOfState;
       }
-      if (0===0) {
+      if (0===1) {
       copyOfState.cart = copyOfState.basket;
       copyOfState.orders.sum = copyOfState.cart.reduce((total, obj)=>{ return Number(total) + Number(obj.sum)},0);
       copyOfState.orders.netto = (copyOfState.orders.sum / 1.19).toFixed(2);
@@ -86,6 +99,10 @@ const reducer = (state=initialState, action)=> {
       console.log(copyOfState);
       return copyOfState;
       case 'SUBMIT':
+      copyOfState.orders= {sum:0,netto:0,tax:0};
+      copyOfState.choco= {type: 'choco', amount:0, price: 9.50, sum:0};
+      copyOfState.pastry= {type: 'pastry', amount:0, price:12, sum:0};
+      copyOfState.candy= {type: 'candy', amount: 0, price: 8,sum:0};
       copyOfState.submitted = !copyOfState.submitted;
       return copyOfState;
 

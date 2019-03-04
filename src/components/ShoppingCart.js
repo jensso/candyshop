@@ -9,7 +9,7 @@ class ShoppingCart extends React.Component {
         <i>your shopping-cart:</i><br/><br/>
         <kbd>netto {this.props.orders.netto}</kbd><br/>
         <kbd>+ tax {this.props.orders.tax}</kbd><br/><br/>
-        <b>total: $ {this.props.orders.sum}</b>
+        <b>total: $ {this.props.orders.sum.toFixed(2)}</b>
         <button onClick={this.props.submit} className="btn btn-sm bg-secondary text-light m-1 p-1">submit order</button>
       </div>
     )
