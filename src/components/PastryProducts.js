@@ -1,30 +1,27 @@
 import React from 'react';
-import pastry_1 from '../content/pastry_1.jpg';
-import pastry_2 from '../content/pastry_2.jpg';
-import pastry_3 from '../content/pastry_3.jpg';
+import { connect } from 'react-redux';
+import {mapStateToProps, mapDispatchToProps} from './ProductFooter.js';
 import { ProductFooterRX } from './ProductFooter.js';
+import { pastry } from '../content/data.js';
 
-export class PastryProducts extends React.Component {
+class PastryProducts extends React.Component {
   render() {
-    return(
-    <div className="container d-flex justify-content-between">
+    return (
+    pastry.map((obj, index)=> {
+    return (
+    <div className="container d-flex justify-content-around"  key={index}>
       <div className="card m-1 p-1">
-        <img className="card-img-top rounded" src={pastry_1} alt="X"/>
-        <div cat="pastry" className="bg-warning text-center card-body">pastry like your GrandMa did<br/><span>$12 /kg</span></div>
-        <ProductFooterRX />
-      </div>
-      <div className="card m-1 p-1">
-        <img className="card-img-top rounded" src={pastry_2} alt="X"/>
-        <img className="card-img-top rounded" src={pastry_2} alt="X"/>
-        <div cat="pastry" className="bg-warning text-center card-body">pastry like you did it<br/><span>$12 /kg</span></div>
-        <ProductFooterRX />
-      </div>
-      <div className="card m-1 p-1">
-        <img className="card-img-top rounded" src={pastry_3} alt="X"/>
-        <div cat="pastry" className="bg-warning text-center card-body">pastry for your party<br/><span>$12 /kg</span></div>
+        <img className="card-img-top" src={obj.pic} alt="X"/>
+      <div className="bg-warning card-body">chocolade in different colors<br/><span>{obj.price}</span></div>
+        <button ident={index} onClick={this.props.addItem} className="btn badge bg-secondary text-light p-2 m-1">+</button>
+        <input ident={index} type="text" onChange={this.props.changeInput} value={this.props['inputVal'+index]} className="form-control mx-1 p-1 lead bg-light text-succeess"></input>
+        <button ident={index} onClick={this.props.decItem} className="btn badge bg-secondary text-light p-2 m-1">-</button>
         <ProductFooterRX />
       </div>
     </div>
-      )
+        )
+      })
+    )
   }
 }
+export const PastryProductsRX = connect(mapStateToProps, mapDispatchToProps)(PastryProducts);

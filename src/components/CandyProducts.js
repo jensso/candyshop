@@ -1,29 +1,27 @@
 import React from 'react';
-import candy_1 from '../content/candy_1.jpg';
-import candy_2 from '../content/candy_2.jpg';
-import candy_3 from '../content/candy_3.jpg';
+import { connect } from 'react-redux';
+import {mapStateToProps, mapDispatchToProps} from './ProductFooter.js';
 import { ProductFooterRX } from './ProductFooter.js'
+import { candy } from '../content/data.js';
 
-export class CandyProducts extends React.Component {
+class CandyProducts extends React.Component {
   render() {
-    return(
-    <div className="container d-flex justify-content-around">
+    return (
+    candy.map((obj, index)=> {
+    return (
+    <div className="container d-flex justify-content-around"  key={index}>
       <div className="card m-1 p-1">
-        <img className="card-img-top" src={candy_1} alt="X"/>
-        <div cat="candy" className="bg-warning card-body">Fruity sweets & fruity Lollipops<br/><span>$8 /kg</span></div>
+        <img className="card-img-top" src={obj.pic} alt="X"/>
+      <div className="bg-warning card-body">chocolade in different colors<br/><span>{obj.price}</span></div>
+        <button ident={index} onClick={this.props.addItem} className="btn badge bg-secondary text-light p-2 m-1">+</button>
+        <input ident={index} type="text" onChange={this.props.changeInput} value={this.props['inputVal'+index]} className="form-control mx-1 p-1 lead bg-light text-succeess"></input>
+        <button ident={index} onClick={this.props.decItem} className="btn badge bg-secondary text-light p-2 m-1">-</button>
         <ProductFooterRX />
+      </div>
     </div>
-    <div className="card m-1 p-1">
-      <img className="card-img-top" src={candy_2} alt="X"/>
-        <div cat="candy" className="bg-warning card-body">Juicy sweets & juicy Lollipops<br/><span>$8 /kg</span></div>
-        <ProductFooterRX />
-    </div>
-    <div className="card m-1 p-1">
-      <img className="card-img-top" src={candy_3} alt="X"/>
-      <div cat="candy" className="bg-warning card-body">Funny sweets with lovely Messages<br/><span>$8 /kg</span></div>
-      <ProductFooterRX />
-    </div>
-</div>
+        )
+      })
     )
   }
 }
+export const CandyProductsRX = connect(mapStateToProps, mapDispatchToProps)(CandyProducts);

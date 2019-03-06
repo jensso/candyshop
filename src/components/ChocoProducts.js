@@ -1,29 +1,32 @@
 import React from 'react';
-import choco_1 from '../content/choco_1.jpg';
-import choco_2 from '../content/choco_2.jpg';
-import choco_3 from '../content/choco_3.jpg';
+import { connect } from 'react-redux';
+import {mapStateToProps, mapDispatchToProps} from './ProductFooter.js';
+import { ProductFooterRX } from './ProductFooter.js';
+import { choco } from '../content/data.js';
 
-import { ProductFooterRX } from './ProductFooter';
-export class ChocoProducts extends React.Component {
+// import { remove, redir, transmit, plus ,minus, changeInput } from '.././redux.js';
+
+
+class ChocoProducts extends React.Component {
   render() {
-    return(
-    <div className="container d-flex justify-content-around">
+    return (
+    choco.map((obj, index)=> {
+    return (
+    <div className="container d-flex justify-content-around"  key={index}>
       <div className="card m-1 p-1">
-        <img className="card-img-top" src={choco_1} alt="X"/>
-        <div cat="choco" className="bg-warning card-body">chocolade in different colors<br/><span>$9.50 /kg</span></div>
-        <ProductFooterRX />
-      </div>
-      <div className="card m-1 p-1">
-        <img className="card-img-top" src={choco_2} alt="X"/>
-        <div cat="choco" className="bg-warning card-body">chocolate for the heart<br/><span>$9.50 /kg</span></div>
-        <ProductFooterRX />
-      </div>
-      <div className="card m-1 p-1">
-        <img className="card-img-top" src={choco_3} alt="X"/>
-        <div cat="choco" className="bg-warning card-body">chocolade from all over the world<br/><span>$9.50 /kg</span></div>
+        <img className="card-img-top" src={obj.pic} alt="X"/>
+      <div className="bg-warning card-body">chocolade in different colors<br/><span>{obj.price}</span></div>
+        <button ident={index} onClick={this.props.addItem} className="btn badge bg-secondary text-light p-2 m-1">+</button>
+        <input ident={index} type="text" onChange={this.props.changeInput} value={this.props['inputVal'+index]} className="form-control mx-1 p-1 lead bg-light text-succeess"></input>
+        <button ident={index} onClick={this.props.decItem} className="btn badge bg-secondary text-light p-2 m-1">-</button>
         <ProductFooterRX />
       </div>
     </div>
+        )
+      })
     )
   }
 }
+
+
+export const ChocoProductsRX = connect(mapStateToProps, mapDispatchToProps)(ChocoProducts);
