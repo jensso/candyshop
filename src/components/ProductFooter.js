@@ -8,7 +8,6 @@ class ProductFooter extends React.Component {
   render() {
     return(
       <div className="card-footer bg-warning">
-        <button onClick={this.props.transmit} className="m-1 btn btn-success btn-sm">add to cart</button>
         <NavLink to='/more'className="text-light">
         <button className="m-1 btn btn-info btn-sm">learn more</button>
         </NavLink>
@@ -20,11 +19,13 @@ class ProductFooter extends React.Component {
 export const mapStateToProps = (state)=> {
   return {
     basket: state.basket,
-    cart: state.cart,
+    val0: state.val[0],
+    val1: state.val[1],
+    val2: state.val[2],
     orders: state.orders,
     clicked: state.clicked,
     submitted: state.submitted,
-    orders: state.orders,
+    newOrder: state.newOrder
   }
 }
 export const mapDispatchToProps = (dispatch)=> {
@@ -34,8 +35,8 @@ export const mapDispatchToProps = (dispatch)=> {
         decItem: (ev)=> dispatch(minus(ev)),
         remove: (ev)=> dispatch(remove(ev)),
         submit: (ev)=> dispatch(submit(ev)),
-          redir: (ev)=> dispatch(redir(ev)),
-          changeInput: (ev)=> dispatch(changeInput(ev))
+        redir: (ev)=> dispatch(redir(ev)),
+        changeInput: (ev)=> dispatch(changeInput(ev))
   }
 }
 export const ProductFooterRX = connect(mapStateToProps, mapDispatchToProps)(ProductFooter);

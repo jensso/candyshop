@@ -1,30 +1,42 @@
 import {createStore} from 'redux';
+import { choco, candy,pastry } from './content/data.js';
 
 const initialState = {
                       basket: [],
-                      cart: [],
+                      val: [0,0,0],
                       clicked: false,
                       submitted: false,
-                      orders: {sum:0,netto:0,tax:0},
+                      newOrder: {},
                       };
 const reducer = (state=initialState, action)=> {
   const copyOfState = {...state};
 
   switch(action.type) {
 
-
     case 'ADD':
+    copyOfState.val[action.targetID] = state.val[action.targetID] + 1;
     return copyOfState;
 
     case 'DEC':
-    return copyOfState;
+    if (copyOfState.val[action.targetID] !==0) {
+      copyOfState.val[action.targetID] -= 1;
+      return copyOfState;
+    }
+    else {
+      return copyOfState;
+    }
 
     case 'INPUT':
-    console.log(action.event.currentTarget);
+    copyOfState.val[action.targetID] = action.value;
     return copyOfState;
 
     case 'BUY':
-    console.log(this.props.basket);
+    console.log(copyOfState);
+   let isIncluded = choco.find((obj)=> {return obj.type=== 'choco3'});
+   console.log(isIncluded);
+    console.log(choco[action.targetID].type);
+    copyOfState.basket = [...copyOfState.basket, copyOfState.newOrder];
+    console.log(copyOfState.basket);
     return copyOfState;
 
       case 'RMV' :
@@ -32,11 +44,10 @@ const reducer = (state=initialState, action)=> {
 
       case 'SUBMIT':
       copyOfState.submitted = !copyOfState.submitted;
-      copyOfState.orders= {sum:0,netto:0,tax:0};
+      copyOfState.newOrder= {};
       return copyOfState;
 
       case 'REDIR':
-      copyOfState.submitted = !copyOfState.submitted;
       return copyOfState;
 
       default:
@@ -47,12 +58,17 @@ export let transmit = (ev)=> {
     return {
     type: 'BUY',
     event: ev,
+    targetID:ev.target.getAttribute('ident'),
+
   }
 }
 export let changeInput = (ev)=> {
+  console.log(ev.target.value);
   return {
     type: 'INPUT',
-    event: ev
+    event: ev,
+    targetID:ev.target.getAttribute('ident'),
+    value: ev.target.value,
   }
 }
 export let remove = (ev)=> {
@@ -76,18 +92,22 @@ export let redir = (ev)=> {
   },5000)
 }
 export let plus = (ev)=> {
-
+  let val = ev.target.nextSibling.value;
   return {
     type: 'ADD',
     event: ev,
+    value: ev.target.nextSibling.value,
+    target: ev.target.nextSibling,
+    targetID: ev.target.nextSibling.getAttribute('ident')
   }
 }
 export let minus = (ev)=> {
   return {
     type: 'DEC',
     event: ev,
-    target: ev.target.parentElement.previousSibling.getAttribute('cat'),
-    value: Number(ev.currentTarget.previousSibling.innerText),
+    value: ev.target.previousSibling.value,
+    target: ev.target.previousSibling,
+    targetID: ev.target.previousSibling.getAttribute('ident')
   }
 }
 
