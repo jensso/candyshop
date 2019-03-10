@@ -18,13 +18,19 @@ choco: [
   description: 'a perfect way to make kids happy'}
 ],
 pastry: [
- {type: 'pastry1', amount:0, price:10.95, sum:0, pic:(pastry_1)},
- {type: 'pastry2', amount:0, price:12.95, sum:0, pic:(pastry_2)},
- {type: 'pastry3', amount:0, price:14.95, sum:0, pic:(pastry_3)}
+ {type: 'pastry1', amount:0, price:10.95, sum:0, pic:(pastry_1),
+  description: 'nutty homemade muffins'},
+ {type: 'pastry2', amount:0, price:12.95, sum:0, pic:(pastry_2),
+  description: 'tasty snacks, cookies and finest sweets'},
+ {type: 'pastry3', amount:0, price:14.95, sum:0, pic:(pastry_3),
+  description: 'cakes & pies for every celebration'}
 ],
 candy: [
- {type: 'candy1', amount: 0, price: 6.90,sum:0, pic:(candy_1)},
- {type: 'candy2', amount: 0, price: 7.90,sum:0, pic:(candy_2)},
- {type: 'candy3', amount: 0, price: 8.90,sum:0, pic:(candy_3)}
+ {type: 'candy1', amount: 0, price: 6.90,sum:0, pic:(candy_1),
+  description: 'colorful & fruity lollipops'},
+ {type: 'candy2', amount: 0, price: 7.90,sum:0, pic:(candy_2),
+  description: 'juicy & multicoloured sweets '},
+ {type: 'candy3', amount: 0, price: 8.90,sum:0, pic:(candy_3),
+  description: 'sweet things with lovely messages'}
 ]
 };
