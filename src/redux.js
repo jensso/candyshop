@@ -1,43 +1,94 @@
 import {createStore} from 'redux';
-import { choco, candy,pastry } from './content/data.js';
+import { products } from './content/data.js';
 
 const initialState = {
                       basket: [],
+                      total: 0,
                       val: [0,0,0],
+                      newOrder: {},
                       clicked: false,
                       submitted: false,
-                      newOrder: {},
                       };
 const reducer = (state=initialState, action)=> {
   const copyOfState = {...state};
 
   switch(action.type) {
 
-    case 'ADD':
-    copyOfState.val[action.targetID] = state.val[action.targetID] + 1;
-    return copyOfState;
-
-    case 'DEC':
-    if (copyOfState.val[action.targetID] !==0) {
-      copyOfState.val[action.targetID] -= 1;
-      return copyOfState;
-    }
-    else {
-      return copyOfState;
-    }
-
     case 'INPUT':
     copyOfState.val[action.targetID] = action.value;
     return copyOfState;
 
     case 'BUY':
-    console.log(copyOfState);
-   let isIncluded = choco.find((obj)=> {return obj.type=== 'choco3'});
-   console.log(isIncluded);
-    console.log(choco[action.targetID].type);
-    copyOfState.basket = [...copyOfState.basket, copyOfState.newOrder];
-    console.log(copyOfState.basket);
-    return copyOfState;
+    if (copyOfState.val[action.targetID] !==0) {
+      let included = Boolean(copyOfState.basket.find((obj)=>obj.type===action.target));
+      let arr = action.event.target.getAttribute('array');
+      if (!included) {
+        if (arr ==='choco') {
+          copyOfState.newOrder = products.choco[action.targetID];
+          copyOfState.newOrder.amount = copyOfState.val[action.targetID];
+          copyOfState.newOrder.sum = copyOfState.newOrder.amount * copyOfState.newOrder.price;
+
+          copyOfState.basket = [...state.basket, copyOfState.newOrder];
+          copyOfState.total = copyOfState.basket.reduce((total, order)=> {return total+order.sum},0).toFixed(2);
+          copyOfState.val[action.targetID] = 0;
+          return copyOfState;
+        }
+        if (arr ==='candy') {
+          copyOfState.newOrder = products.candy[action.targetID];
+          copyOfState.newOrder.amount = copyOfState.val[action.targetID];
+          copyOfState.newOrder.sum = copyOfState.newOrder.amount * copyOfState.newOrder.price;
+
+          copyOfState.basket = [...state.basket, copyOfState.newOrder];
+          copyOfState.total = copyOfState.basket.reduce((total, order)=> {return total+order.sum},0).toFixed(2);
+          copyOfState.val[action.targetID] = 0;
+          return copyOfState;
+        }
+        if (arr ==='pastry') {
+          copyOfState.newOrder = products.pastry[action.targetID];
+          copyOfState.newOrder.amount = copyOfState.val[action.targetID];
+          copyOfState.newOrder.sum = copyOfState.newOrder.amount * copyOfState.newOrder.price;
+
+          copyOfState.basket = [...state.basket, copyOfState.newOrder];
+          copyOfState.total = copyOfState.basket.reduce((total, order)=> {return total+order.sum},0).toFixed(2);
+          copyOfState.val[action.targetID] = 0;
+          return copyOfState;
+        }
+      }
+      if (included) {
+        if (arr === 'choco') {
+          copyOfState.newOrder = products.choco[action.targetID];
+          copyOfState.newOrder.amount = copyOfState.val[action.targetID];
+          copyOfState.newOrder.sum = copyOfState.newOrder.amount * copyOfState.newOrder.price;
+
+          copyOfState.total = copyOfState.basket.reduce((total, order)=> {return total+order.sum},0).toFixed(2);
+          copyOfState.val[action.targetID] = 0;
+          return copyOfState;
+
+        }
+        if (arr === 'candy') {
+          copyOfState.newOrder = products.candy[action.targetID];
+          copyOfState.newOrder.amount = copyOfState.val[action.targetID];
+          copyOfState.newOrder.sum = copyOfState.newOrder.amount * copyOfState.newOrder.price;
+
+          copyOfState.total = copyOfState.basket.reduce((total, order)=> {return total+order.sum},0).toFixed(2);
+          copyOfState.val[action.targetID] = 0;
+          return copyOfState;
+
+        }
+        if (arr === 'pastry') {
+          copyOfState.newOrder = products.pastry[action.targetID];
+          copyOfState.newOrder.amount = copyOfState.val[action.targetID];
+          copyOfState.newOrder.sum = copyOfState.newOrder.amount * copyOfState.newOrder.price;
+
+          copyOfState.total = copyOfState.basket.reduce((total, order)=> {return total+order.sum},0).toFixed(2);
+          copyOfState.val[action.targetID] = 0;
+          return copyOfState;
+        }
+      }
+      else {
+      return copyOfState;
+    }
+  }
 
       case 'RMV' :
       return copyOfState;
@@ -45,6 +96,8 @@ const reducer = (state=initialState, action)=> {
       case 'SUBMIT':
       copyOfState.submitted = !copyOfState.submitted;
       copyOfState.newOrder= {};
+      copyOfState.basket = [];
+      copyOfState.total = 0;
       return copyOfState;
 
       case 'REDIR':
@@ -58,16 +111,15 @@ export let transmit = (ev)=> {
     return {
     type: 'BUY',
     event: ev,
-    targetID:ev.target.getAttribute('ident'),
-
+    targetID: ev.target.getAttribute('ident'),
+    target: ev.target.previousSibling.getAttribute('cat'),
   }
 }
 export let changeInput = (ev)=> {
-  console.log(ev.target.value);
   return {
     type: 'INPUT',
     event: ev,
-    targetID:ev.target.getAttribute('ident'),
+    targetID: ev.target.getAttribute('ident'),
     value: ev.target.value,
   }
 }
@@ -84,31 +136,10 @@ export let submit = (ev)=> {
   }
 }
 export let redir = (ev)=> {
-  setTimeout(()=> {
     return {
       type: 'REDIR',
       event: ev
     }
-  },5000)
-}
-export let plus = (ev)=> {
-  let val = ev.target.nextSibling.value;
-  return {
-    type: 'ADD',
-    event: ev,
-    value: ev.target.nextSibling.value,
-    target: ev.target.nextSibling,
-    targetID: ev.target.nextSibling.getAttribute('ident')
-  }
-}
-export let minus = (ev)=> {
-  return {
-    type: 'DEC',
-    event: ev,
-    value: ev.target.previousSibling.value,
-    target: ev.target.previousSibling,
-    targetID: ev.target.previousSibling.getAttribute('ident')
-  }
 }
 
 export const store = createStore(reducer);

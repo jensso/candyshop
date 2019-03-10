@@ -25,13 +25,11 @@ class NavBasket extends React.Component {
           <img className="p-1 img-thumbnail mx-auto" src={basket} alt="X" width="25%"/>
         </section>
         <span className="d-flex bg-success">
-          <NavLink to='/'className="text-light mx-4 px-4">home</NavLink>
-          <NavLink to='/chocolades/products'className="text-light px-4">chocolades</NavLink>
-          <NavLink to='/candys/products'className="text-light px-4">candys</NavLink>
-          <NavLink to='/pastrys/products'className="text-light px-4">pastrys</NavLink>
+          <NavLink to='/'className="nav-link text-warning">home</NavLink>
+          <NavLink to='/chocolades/products'className="nav-link text-light">chocolades</NavLink>
+          <NavLink to='/candys/products'className="nav-link text-light">candys</NavLink>
+          <NavLink to='/pastrys/products'className="nav-link text-light">pastrys</NavLink>
         </span>
-        <button onClick={()=> {console.log(this.props)}}>log props</button>
-
       </nav>
     )
   }
