@@ -5,16 +5,18 @@ import {mapStateToProps, mapDispatchToProps} from './ProductFooter.js';
 class ShoppingBasket extends React.Component {
   render() {
     return(
+      <>
       <div className="container bg-info my-1 p-2">
         <i>your Products:</i><br/>
-        <ul className="text-right">
+        <ul className="list-group text-right">
         {this.props.basket.map((obj, index)=>{
-          return <li key={index}>{obj.amount}x {obj.type} for {obj.price.toFixed(2)}<br />
-          <i>={obj.sum.toFixed(2)}</i><hr /></li>
+          return <li className="list-group-item" key={index}>{obj.amount}x {obj.type} for {obj.price.toFixed(2)} <br />
+          <i>={obj.sum.toFixed(2)}</i>
+          </li>
         })}
         </ul>
-        <button onClick={this.props.remove} className="btn btn-sm bg-secondary text-light mx-1 p-1">change order</button>
       </div>
+      </>
     )
   }
 }

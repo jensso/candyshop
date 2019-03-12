@@ -73,7 +73,6 @@ const reducer = (state=initialState, action)=> {
           copyOfState.total = copyOfState.basket.reduce((total, order)=> {return total+order.sum},0).toFixed(2);
           copyOfState.val[action.targetID] = 0;
           return copyOfState;
-
         }
         if (arr === 'pastry') {
           copyOfState.newOrder = products.pastry[action.targetID];
@@ -89,18 +88,20 @@ const reducer = (state=initialState, action)=> {
       return copyOfState;
     }
   }
+  break;
 
       case 'RMV' :
       return copyOfState;
 
       case 'SUBMIT':
-      copyOfState.submitted = !copyOfState.submitted;
-      copyOfState.newOrder= {};
-      copyOfState.basket = [];
-      copyOfState.total = 0;
+      copyOfState.submitted = true;
       return copyOfState;
 
       case 'REDIR':
+      copyOfState.newOrder= {};
+      copyOfState.basket = [];
+      copyOfState.total = 0;
+      copyOfState.submitted = false;
       return copyOfState;
 
       default:

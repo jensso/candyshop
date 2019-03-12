@@ -7,9 +7,9 @@ class ProductFooter extends React.Component {
 
   render() {
     return(
-      <div className="card-footer bg-warning">
-        <NavLink to='/more'className="text-light">
-        <button className="m-1 btn btn-info btn-sm">learn more</button>
+      <div className="card-footer mx-auto bg-warning">
+        <NavLink to='/products/more'className="text-light">
+        <button className="m-1 p-2 btn btn-info">learn more</button>
         </NavLink>
       </div>
     )

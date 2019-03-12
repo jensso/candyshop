@@ -1,13 +1,11 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
 import {connect} from 'react-redux';
 import {mapStateToProps, mapDispatchToProps} from './ProductFooter.js';
-import {submit} from '.././redux.js';
 
 class SubmitArea extends React.Component {
   componentDidMount() {
-
-  }
+    setTimeout(()=>{this.props.redir()},5000);
+    }
 
   render() {
       return (

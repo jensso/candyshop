@@ -13,16 +13,16 @@ class NavBasket extends React.Component {
   render() {
     return(
       <nav className="navbar bg-success">
-          <img src={candyshop} width="25%" alt="X"/>
-          <img src={candyshop} width="25%" alt="X"/>
-          <img src={candyshop} width="25%" alt="X"/>
-          <img src={candyshop} width="25%" alt="X"/>
-        <h3 className="title bg-success text-light p-2">welcome to the candyshop</h3>
+        <img src={candyshop} alt="X" width="25%"/>
+        <img src={candyshop} alt="X" width="25%"/>
+        <img src={candyshop} alt="X" width="25%"/>
+        <img src={candyshop} alt="X" width="25%"/>
+        <h3 className="title bg-success text-light p-1">welcome to the candyshop</h3>
         <section className="d-flex bg-light my-1 p-1">
-          <img className="p-1 img-thumbnail mx-auto" src={basket} alt="X" width="25%"/>
           <ShoppingCartRX />
+          <img className="p-1 img-fluid mx-auto" src={basket} alt="X" width="25%"/>
           <ShoppingBasketRX />
-          <img className="p-1 img-thumbnail mx-auto" src={basket} alt="X" width="25%"/>
+          <img className="p-1 img-fluid mx-auto" src={basket} alt="X" width="25%"/>
         </section>
         <span className="d-flex bg-success">
           <NavLink to='/'className="nav-link text-warning">home</NavLink>
