@@ -4,9 +4,8 @@ import {mapStateToProps, mapDispatchToProps} from './ProductFooter.js';
 
 class SubmitArea extends React.Component {
   componentDidMount() {
-    setTimeout(()=>{this.props.redir()},5000);
+      setTimeout(()=>{this.props.redir()},5000);
     }
-
   render() {
       return (
         <div className="jumbotron p-4 bg-danger text-light">

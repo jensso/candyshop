@@ -1,15 +1,15 @@
 import React from 'react';
 import {  NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { remove, submit, redir, transmit, changeInput } from '.././redux.js';
+import { submit, redir, transmit, changeInput } from '.././redux.js';
 
 class ProductFooter extends React.Component {
 
   render() {
     return(
-      <div className="card-footer mx-auto bg-warning">
-        <NavLink to='/products/more'className="text-light">
-        <button className="m-1 p-2 btn btn-info">learn more</button>
+      <div className="card-footer bg-warning">
+        <NavLink to='/products/more'className="text-light d-flex">
+        <button className="p-2 mx-auto btn btn-info">learn more</button>
         </NavLink>
       </div>
     )
@@ -31,7 +31,6 @@ export const mapStateToProps = (state)=> {
 export const mapDispatchToProps = (dispatch)=> {
   return {
         transmit: (ev)=> dispatch(transmit(ev)),
-        remove: (ev)=> dispatch(remove(ev)),
         submit: (ev)=> dispatch(submit(ev)),
         redir: (ev)=> dispatch(redir(ev)),
         changeInput: (ev)=> dispatch(changeInput(ev))

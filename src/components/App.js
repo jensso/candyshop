@@ -1,5 +1,4 @@
 import React from 'react';
-// import './App.css';
 import { BrowserRouter, NavLink, Route, Switch } from 'react-router-dom';
 import { Candys } from './Candys.js';
 import { Chocolades } from './Chocolades.js';
@@ -7,9 +6,6 @@ import { Pastrys } from './Pastrys.js';
 import { Home } from './Home.js';
 import { NavBasketRX } from './NavBasket.js';
 import { SubmitAreaRX } from './SubmitArea.js';
-// import { RemoveOrderRX } from './RemoveOrder.js';
-// import {ShoppingCartRX} from './ShoppingCart.js';
-// import {ShoppingBasketRX} from './ShoppingBasket.js'
 import {connect} from 'react-redux';
 import {mapStateToProps, mapDispatchToProps} from './ProductFooter.js';
 import { MoreInfo } from './MoreInfo.js';

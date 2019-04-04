@@ -27,7 +27,6 @@ const reducer = (state=initialState, action)=> {
           copyOfState.newOrder = products.choco[action.targetID];
           copyOfState.newOrder.amount = copyOfState.val[action.targetID];
           copyOfState.newOrder.sum = copyOfState.newOrder.amount * copyOfState.newOrder.price;
-
           copyOfState.basket = [...state.basket, copyOfState.newOrder];
           copyOfState.total = copyOfState.basket.reduce((total, order)=> {return total+order.sum},0).toFixed(2);
           copyOfState.val[action.targetID] = 0;
@@ -37,7 +36,6 @@ const reducer = (state=initialState, action)=> {
           copyOfState.newOrder = products.candy[action.targetID];
           copyOfState.newOrder.amount = copyOfState.val[action.targetID];
           copyOfState.newOrder.sum = copyOfState.newOrder.amount * copyOfState.newOrder.price;
-
           copyOfState.basket = [...state.basket, copyOfState.newOrder];
           copyOfState.total = copyOfState.basket.reduce((total, order)=> {return total+order.sum},0).toFixed(2);
           copyOfState.val[action.targetID] = 0;
@@ -47,7 +45,6 @@ const reducer = (state=initialState, action)=> {
           copyOfState.newOrder = products.pastry[action.targetID];
           copyOfState.newOrder.amount = copyOfState.val[action.targetID];
           copyOfState.newOrder.sum = copyOfState.newOrder.amount * copyOfState.newOrder.price;
-
           copyOfState.basket = [...state.basket, copyOfState.newOrder];
           copyOfState.total = copyOfState.basket.reduce((total, order)=> {return total+order.sum},0).toFixed(2);
           copyOfState.val[action.targetID] = 0;
@@ -59,7 +56,6 @@ const reducer = (state=initialState, action)=> {
           copyOfState.newOrder = products.choco[action.targetID];
           copyOfState.newOrder.amount = copyOfState.val[action.targetID];
           copyOfState.newOrder.sum = copyOfState.newOrder.amount * copyOfState.newOrder.price;
-
           copyOfState.total = copyOfState.basket.reduce((total, order)=> {return total+order.sum},0).toFixed(2);
           copyOfState.val[action.targetID] = 0;
           return copyOfState;
@@ -69,7 +65,6 @@ const reducer = (state=initialState, action)=> {
           copyOfState.newOrder = products.candy[action.targetID];
           copyOfState.newOrder.amount = copyOfState.val[action.targetID];
           copyOfState.newOrder.sum = copyOfState.newOrder.amount * copyOfState.newOrder.price;
-
           copyOfState.total = copyOfState.basket.reduce((total, order)=> {return total+order.sum},0).toFixed(2);
           copyOfState.val[action.targetID] = 0;
           return copyOfState;
@@ -78,7 +73,6 @@ const reducer = (state=initialState, action)=> {
           copyOfState.newOrder = products.pastry[action.targetID];
           copyOfState.newOrder.amount = copyOfState.val[action.targetID];
           copyOfState.newOrder.sum = copyOfState.newOrder.amount * copyOfState.newOrder.price;
-
           copyOfState.total = copyOfState.basket.reduce((total, order)=> {return total+order.sum},0).toFixed(2);
           copyOfState.val[action.targetID] = 0;
           return copyOfState;
@@ -88,13 +82,13 @@ const reducer = (state=initialState, action)=> {
       return copyOfState;
     }
   }
+    else {return copyOfState}
   break;
 
-      case 'RMV' :
-      return copyOfState;
-
       case 'SUBMIT':
-      copyOfState.submitted = true;
+      if (copyOfState.total !==0) {
+        copyOfState.submitted = true;
+      }
       return copyOfState;
 
       case 'REDIR':
@@ -121,13 +115,7 @@ export let changeInput = (ev)=> {
     type: 'INPUT',
     event: ev,
     targetID: ev.target.getAttribute('ident'),
-    value: ev.target.value,
-  }
-}
-export let remove = (ev)=> {
-  return {
-    type: 'RMV',
-    event: ev,
+    value: ev.target.value
   }
 }
 export let submit = (ev)=> {
@@ -142,5 +130,4 @@ export let redir = (ev)=> {
       event: ev
     }
 }
-
 export const store = createStore(reducer);

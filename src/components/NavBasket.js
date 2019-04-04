@@ -5,7 +5,6 @@ import basket from '../content/basket.jpg';
 import {ShoppingCartRX} from './ShoppingCart.js';
 import {ShoppingBasketRX} from './ShoppingBasket.js'
 import {connect} from 'react-redux';
-// import {transmit} from '.././redux.js';
 import {mapStateToProps, mapDispatchToProps} from './ProductFooter.js';
 
 

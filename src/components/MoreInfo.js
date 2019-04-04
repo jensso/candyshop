@@ -9,7 +9,7 @@ export class MoreInfo extends React.Component {
         <p className="lead m-2 px-1 bg-light text-secondary"><b>Candy</b>, also called sweets or lollies, is a confection that features sugar as a principal ingredient. The category, called sugar confectionery, encompasses any sweet confection, including chocolate, chewing gum, and sugar candy.</p>
         <p className="lead m-2 px-1 bg-light text-secondary"><b>Pastry</b> is a dough of flour, water and shortening that may be savoury or sweetened. Sweetened pastries are often described as bakers' confectionery. The word "pastries" suggests many kinds of baked products made from ingredients such as flour, sugar, milk, butter, shortening, baking powder, and eggs.</p>
         <span className="d-flex bg-info">
-          <NavLink to='/start'className="nav-link text-dark">back</NavLink>
+          <NavLink to='/start'className="nav-link text-dark">back to products</NavLink>
         </span>
       </div>
     )

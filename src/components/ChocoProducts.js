@@ -10,7 +10,7 @@ class ChocoProducts extends React.Component {
 
     products.choco.map((obj, index)=> {
     return (
-    <div className="container-fluid d-flex justify-content-around"  key={index}>
+    <div className="container-fluid d-flex justify-content-around" key={index}>
       <div className="card m-1 p-1">
         <img className="card-img-top img-fluid" src={obj.pic} style={{height: '200px'}} alt="X"/>
         <h5 className="bg-warning m-0 p-2">{obj.type}</h5>
